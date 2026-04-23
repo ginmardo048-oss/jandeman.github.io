@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Jan de man - Kapperszaak in Suriname</title>
+    <style>
+        /* ============================================
+           GLOBALE STIJLEN - voor alle pagina's
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #faf7f2;
+            color: #2e241f;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Warme Surinaamse kleuren */
+        :root {
+            --sand: #e9dfc7;
+            --brown: #8b5a2b;
+            --darkbrown: #4a2a1a;
+            --accent: #c57c3c;
+            --light: #fffaf3;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+        }
+
+        /* Top bar */
+        .top-bar {
+            background-color: var(--darkbrown);
+            color: #f9e7c2;
+            padding: 0.7rem 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Navigatie - ZELFDE OP ALLE PAGINA'S */
+        nav {
+            background: white;
+            padding: 0.9rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid #f0e4d4;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6b3e1c, #b45f2b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .logo p {
+            font-size: 0.8rem;
+            color: #b96f30;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #3a2a21;
+            transition: 0.2s;
+            font-size: 1rem;
+            padding: 0.3rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Actieve pagina markering */
+        .nav-links a.active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        /* Container voor alle inhoud */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            flex: 1;
+        }
+
+        /* Sectie titels */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            border-left: 5px solid var(--accent);
+            padding-left: 1rem;
+            margin-bottom: 2rem;
+            color: #34231a;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--brown);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Diensten grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: 0.2s;
+            border: 1px solid #f5e9de;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2.7rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            background: #fef4e8;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            margin-top: 0.5rem;
+        }
+
+        /* Prijstabel */
+        .price-table {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .price-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .price-table th, .price-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #f0e2d4;
+        }
+        .price-table th {
+            background: #f5ede2;
+            color: var(--darkbrown);
+            font-weight: 700;
+        }
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Gallerij grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+            padding-bottom: 1rem;
+        }
+        .gallery-img {
+            background: #e3d2be;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        .gallery-item p {
+            padding: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Contact panels */
+        .info-panels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .panel {
+            background: white;
+            flex: 1;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #f2e5d8;
+        }
+        .hours-list p {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #f0e2d4;
+        }
+        .contact-details div {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .whatsapp-btn {
+            background-color: #25D366;
+            border-radius: 40px;
+            padding: 0.6rem 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        .map-placeholder {
+            background: #e9ddce;
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Over Jan */
+        .about-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            background: #fffaf3;
+            border-radius: 2rem;
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+        }
+        .about-text {
+            flex: 2;
+        }
+        .about-highlight {
+            background: #eedfcb;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+            border-left: 6px solid var(--accent);
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background: #2f241e;
+            color: #d9cfc2;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 4px solid var(--accent);
+        }
+
+        @media (max-width: 700px) {
+            nav { flex-direction: column; text-align: center; }
+            .nav-links { justify-content: center; gap: 1rem; }
+            .section-title { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    ✂️ Sinds 2010 de vertrouwde kapper van Paramaribo en omstreken ✂️
+</div>
+
+<nav>
+    <div class="logo">
+        <h1>Jan de man</h1>
+        <p>✂️ Kappersvakmanschap uit Suriname</p>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" data-page="home">Home</a></li>
+        <li><a href="diensten.html" data-page="diensten">Diensten</a></li>
+        <li><a href="over.html" data-page="over">Over Jan</a></li>
+        <li><a href="prijzen.html" data-page="prijzen">Prijzen</a></li>
+        <li><a href="gallerij.html" data-page="gallerij">Gallerij</a></li>
+        <li><a href="contact.html" data-page="contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- ==================== HOME PAGINA ==================== -->
+<div id="home-page" class="page-content">
+    <div class="hero" style="background: linear-gradient(107deg, #f7efdd 0%, #f3e5d3 100%); padding: 3rem 2rem; text-align: center; border-radius: 1.5rem; margin-bottom: 2rem;">
+        <h2 style="font-size: 2.5rem; color: var(--darkbrown);">Klaar voor een <span style="color:#b45f2b;">verschijning</span>?</h2>
+        <p style="font-size: 1.2rem; max-width: 700px; margin: 1rem auto;">Precisie kapsels, baardverzorging en trends – midden in het hart van Suriname.</p>
+        <a href="contact.html" class="btn">✂️ Reserveer jouw afspraak</a>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2 class="section-title">Waarom Jan de man?</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+                <div style="flex:1; min-width:200px; background:white; padding:1.5rem; border-radius:1rem; text-align:center;"><span style="font-size:2rem;">💈</span><h3>Vakmanschap</h3><p>Jaren ervaring met alle haartypes</p></div>
+                <div style="flex:1; min-width:200px; background:white; padding:1.5rem; border-radius:1rem; text-align:center;"><span style="font-size:2rem;">🧴</span><h3>Hygiëne & zorg</h3><p>Sterilisatie en schone handdoeken</p></div>
+                <div style="flex:1; min-width:200px; background:white; padding:1.5rem; border-radius:1rem; text-align:center;"><span style="font-size:2rem;">☕</span><h3>Gezellige sfeer</h3><p>Koffie, thee en een lach van Jan</p></div>
+            </div>
+        </section>
+
+        <section style="margin-top: 2rem;">
+            <h2 class="section-title">Populaire behandelingen</h2>
+            <div class="services-grid">
+                <div class="service-card"><div class="service-icon">💈</div><h3>Herenknippen</h3><p>Fade, undercut of klassiek</p><div class="price">SRD 85</div></div>
+                <div class="service-card"><div class="service-icon">🧔‍♂️</div><h3>Baard & Scheren</h3><p>Hot towel + lijnen</p><div class="price">SRD 55</div></div>
+                <div class="service-card"><div class="service-icon">✨</div><h3>Complete Styling</h3><p>Wassen, knippen, föhnen</p><div class="price">SRD 120</div></div>
+            </div>
+            <div style="text-align:center; margin-top:2rem;"><a href="diensten.html" class="btn">Bekijk alle diensten →</a></div>
+        </section>
+    </div>
+</div>
+
+<!-- ==================== DIENSTEN PAGINA ==================== -->
+<div id="diensten-page" class="page-content" style="display:none;">
+    <div class="container">
+        <h2 class="section-title">Onze behandelingen</h2>
+        <div class="services-grid">
+            <div class="service-card"><div class="service-icon">💈</div><h3>Herenknippen</h3><p>Precisie knipbeurt, wassen & advies</p><div class="price">SRD 85</div></div>
+            <div class="service-card"><div class="service-icon">🧔‍♂️</div><h3>Baardmodellage</h3><p>Scheren, trimmen & warme doek</p><div class="price">SRD 55</div></div>
+            <div class="service-card"><div class="service-icon">✨</div><h3>Deluxe Styling</h3><p>Inclusief hoofdhuidmassage en stylingproduct</p><div class="price">SRD 120</div></div>
+            <div class="service-card"><div class="service-icon">🧒🏽</div><h3>Kids & Tieners</h3><p>Voor jongens t/m 12 jaar</p><div class="price">SRD 55</div></div>
+            <div class="service-card"><div class="service-icon">💇🏽‍♂️</div><h3>Baardverzorging + Knippen</h3><p>Combi deal voor echte mannen</p><div class="price">SRD 130</div></div>
+            <div class="service-card"><div class="service-icon">🎩</div><h3>Bruidskapsel / Speciale gelegenheid</h3><p>Op afspraak, maatwerk</p><div class="price">Vanaf SRD 150</div></div>
+        </div>
+        <p style="margin-top: 2rem; background:#f9efe4; padding:1rem; border-radius:1rem;">* Alle prijzen incl. BTW. Wij accepteren contant en SRD overschrijving.</p>
+    </div>
+</div>
+
+<!-- ==================== OVER JAN PAGINA ==================== -->
+<div id="over-page" class="page-content" style="display:none;">
+    <div class="container">
+        <h2 class="section-title">Ontmoet Jan</h2>
+        <div class="about-wrap">
+            <div class="about-text">
+                <p><strong>Jan de man</strong> – al meer dan 12 jaar een begrip in Paramaribo. Jan startte zijn carrière in een kleine salon in het centrum en groeide uit tot een van de meest gevraagde kappers voor heren in Suriname.</p>
+                <div class="about-highlight">“Een goed kapsel is geen luxe, het is de finishing touch van je dagelijkse zelfvertrouwen. En dat mag ook knip voor knip voelbaar zijn.” – Jan</div>
+                <p>Jan volgt jaarlijks internationale trends en past deze aan op het Surinaamse klimaat: luchtige, onderhoudsvriendelijke looks die de hele dag blijven zitten. Daarnaast geeft hij jonge kappers graag de kans om te leren in zijn salon.</p>
+                <p>Naast knippen is Jan ook bekend om zijn gastvrijheid: een praatje, goede muziek en altijd een glimlach.</p>
+            </div>
+            <div class="about-text" style="flex:1; text-align:center;">
+                <div style="font-size: 6rem;">🧔🏽‍♂️✂️</div>
+                <p style="font-weight: bold;">Jan zelf aan het werk</p>
+                <small>vakman met passie</small>
+            </div>
+        </div>
+        <div style="margin-top: 2rem; background:white; border-radius:1.5rem; padding:1.5rem;">
+            <h3>⭐ Waarom klanten terugkomen ⭐</h3>
+            <p>"Jan geeft altijd eerlijk advies en levert topwerk. Geen gehaast, gewoon perfect." – Rashid</p>
+            <p>"Eindelijk een kapper die luistert naar wat ik wil. Mijn hele familie gaat nu naar Jan!" – Mitchell</p>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== PRIJZEN PAGINA ==================== -->
+<div id="prijzen-page" class="page-content" style="display:none;">
+    <div class="container">
+        <h2 class="section-title">Prijslijst 2026</h2>
+        <div class="price-table">
+            <table>
+                <tr><th>Behandeling</th><th>Prijs (SRD)</th></tr>
+                <tr><td>Herenknippen (klassiek / modern)</td><td>85</td></tr>
+                <tr><td>Fade / Skin fade</td><td>95</td></tr>
+                <tr><td>Baardtrimmen & scheren</td><td>55</td></tr>
+                <tr><td>Baard + herenknippen</td><td>130</td></tr>
+                <tr><td>Complete styling (wassen, knippen, föhnen)</td><td>120</td></tr>
+                <tr><td>Kind (t/m 12 jaar)</td><td>55</td></tr>
+                <tr><td>Tiener (13 - 17 jaar)</td><td>70</td></tr>
+                <tr><td>Bruidskapsel / evenementen (per persoon)</td><td>150</td></tr>
+                <tr><td>Haarverzorgingspakket (shampoo + advies)</td><td>30</td></tr>
+            </table>
+        </div>
+        <p style="margin-top: 1rem;">* Alle prijzen zijn inclusief BTW. Vraag naar onze combi deals!</p>
+    </div>
+</div>
+
+<!-- ==================== GALLERIJ PAGINA ==================== -->
+<div id="gallerij-page" class="page-content" style="display:none;">
+    <div class="container">
+        <h2 class="section-title">Onze werkstijl – Inspiratie</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><div class="gallery-img">💈✂️</div><p>Moderne fade met baardlijn</p></div>
+            <div class="gallery-item"><div class="gallery-img">🧔🏽‍♂️✨</div><p>Hot towel behandeling</p></div>
+            <div class="gallery-item"><div class="gallery-img">👑💇🏽</div><p>Strakke undercut</p></div>
+            <div class="gallery-item"><div class="gallery-img">🧒🏽🔪</div><p>Kindermodel – precies en veilig</p></div>
+            <div class="gallery-item"><div class="gallery-img">💈🇸🇷</div><p>Surinaamse sfeer in de salon</p></div>
+            <div class="gallery-item"><div class="gallery-img">✂️🪒</div><p>Vintage scheerservice</p></div>
+        </div>
+        <p style="text-align:center; margin-top:2rem;">📸 Volg ons op Instagram <strong>@jan.deman.kapper</strong> voor wekelijks nieuwe looks!</p>
+    </div>
+</div>
+
+<!-- ==================== CONTACT PAGINA ==================== -->
+<div id="contact-page" class="page-content" style="display:none;">
+    <div class="container">
+        <h2 class="section-title">Bezoek & contact</h2>
+        <div class="info-panels">
+            <div class="panel">
+                <h3>📅 Openingstijden</h3>
+                <div class="hours-list">
+                    <p><span>Maandag - Vrijdag</span><span>09:00 – 18:00</span></p>
+                    <p><span>Zaterdag</span><span>09:00 – 16:00</span></p>
+                    <p><span>Zondag</span><span>Gesloten (groepen op afspraak)</span></p>
+                    <p><span>Feestdagen</span><span>Beperkt, check socials</span></p>
+                </div>
+                <div class="map-placeholder">
+                    📍 <strong>Jan de man Kapper</strong><br>
+                    Zwartenhovenbrugstraat 123, Paramaribo<br>
+                    (tegenover het palmbos, naast de bakkerij)
+                </div>
+            </div>
+            <div class="panel">
+                <h3>📞 Neem contact op</h3>
+                <div class="contact-details">
+                    <div>📱 <strong>Telefoon:</strong> +597 876-5432</div>
+                    <div>💬 <strong>WhatsApp:</strong> +597 712-3456</div>
+                    <div>✉️ <strong>E-mail:</strong> info@jandeman.sr</div>
+                    <div>📸 <strong>Instagram:</strong> @jan.deman.kapper</div>
+                </div>
+                <a href="https://wa.me/5977123456?text=Hallo%20Jan,%20ik%20wil%20graag%20een%20afspraak%20maken!" target="_blank" class="whatsapp-btn">
+                    💬 Stuur WhatsApp bericht
+                </a>
+                <p style="margin-top:1rem;">Reserveer direct via WhatsApp of bel even. Voor grote groepen graag 2 dagen van tevoren.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 Jan de man – Kapperszaak in Suriname | Vakwerk met een lach ✂️</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">📍 Zwartenhovenbrugstraat 123, Paramaribo – Loop gerust binnen</p>
+</footer>
+
+<script>
+    // ============================================
+    // MULTI-PAGINA LOGICA ZONDER SERVER
+    // Toont de juiste pagina op basis van de URL
+    // ============================================
+    function showPage(pageId) {
+        // Verberg alle pagina's
+        const pages = ['home-page', 'diensten-page', 'over-page', 'prijzen-page', 'gallerij-page', 'contact-page'];
+        pages.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+        // Toon de gekozen pagina
+        const activePage = document.getElementById(pageId);
+        if (activePage) activePage.style.display = 'block';
+
+        // Update active class in navigatie
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (href === getPageFilename(pageId)) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Update document title voor betere gebruikerservaring
+        const titles = {
+            'home-page': 'Jan de man - Home | Kapper Suriname',
+            'diensten-page': 'Diensten | Jan de man Kapper',
+            'over-page': 'Over Jan | Jan de man',
+            'prijzen-page': 'Prijzen | Jan de man',
+            'gallerij-page': 'Gallerij | Jan de man Kapsels',
+            'contact-page': 'Contact & Openingstijden | Jan de man'
+        };
+        document.title = titles[pageId] || 'Jan de man - Kapperszaak Suriname';
+    }
+
+    function getPageFilename(pageId) {
+        const mapping = {
+            'home-page': 'index.html',
+            'diensten-page': 'diensten.html',
+            'over-page': 'over.html',
+            'prijzen-page': 'prijzen.html',
+            'gallerij-page': 'gallerij.html',
+            'contact-page': 'contact.html'
+        };
+        return mapping[pageId] || 'index.html';
+    }
+
+    // Bepaal welke pagina getoond moet worden obv de huidige URL (zonder server)
+    function determinePageFromUrl() {
+        const path = window.location.pathname;
+        const page = path.split('/').pop(); // bv "index.html" of "diensten.html"
+        if (page === 'diensten.html') return 'diensten-page';
+        if (page === 'over.html') return 'over-page';
+        if (page === 'prijzen.html') return 'prijzen-page';
+        if (page === 'gallerij.html') return 'gallerij-page';
+        if (page === 'contact.html') return 'contact-page';
+        return 'home-page'; // default index.html
+    }
+
+    // Intercepteer alle navigatie-links zodat we geen echte page reload krijgen
+    function setupNavigation() {
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                let href = this.getAttribute('href');
+                let targetPage = 'home-page';
+                if (href === 'diensten.html') targetPage = 'diensten-page';
+                else if (href === 'over.html') targetPage = 'over-page';
+                else if (href === 'prijzen.html') targetPage = 'prijzen-page';
+                else if (href === 'gallerij.html') targetPage = 'gallerij-page';
+                else if (href === 'contact.html') targetPage = 'contact-page';
+                else targetPage = 'home-page';
+                
+                // Update URL zonder herladen (history push)
+                const newUrl = href === 'index.html' ? '/' : href;
+                window.history.pushState({ page: targetPage }, '', href);
+                showPage(targetPage);
+            });
+        });
+        
+        // Voor terug / vooruit knoppen in browser
+        window.addEventListener('popstate', function(event) {
+            const pageId = determinePageFromUrl();
+            showPage(pageId);
+        });
+    }
+
+    // Initialiseer de juiste pagina bij laden
+    function init() {
+        const startPage = determinePageFromUrl();
+        showPage(startPage);
+        setupNavigation();
+    }
+
+    init();
+</script>
+</body>
+</html>
